@@ -1,0 +1,87 @@
+<template>
+<div class="container text-warning">
+    <h1 class="">PROJECT: ToDo</h1>
+    <hr>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+
+        <input @keydown.enter="ant" class="form-control bg-dark border-bottom text-light my-5 rounded-0" id="mainput" type="text" placeholder="bir şeyler yazınız">
+
+        <div class="row">
+            <div class="col">
+                <ul class="list-group rounded-0">
+                    <li v-for="todo in todolist" :key="todo.id" class="d-flex align-items-center justify-content-between list-group-item bg-warning text-dark my-1 ">
+                        <span id="todotext" class="border border-dark p-1 d-flex ">{{ todo.text }}</span>
+                        <button @click="deleteitem(todo)" class="btn btn-dark text-warning rounded-0">SİL</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            todolist: [{
+                    id: 1,
+                    text: "Bootcamp #1"
+                },
+
+                {
+                    id: 2,
+                    text: "Bootcamp #2"
+                },
+                {
+                    id: 3,
+                    text: "Bootcamp #3"
+                },
+                {
+                    id: 4,
+                    text: "Bootcamp #4"
+                },
+                {
+                    id: 5,
+                    text: "Bootcamp #5"
+                },
+                {
+                    id: 6,
+                    text: "Bootcamp #6"
+                },
+            ]
+        }
+    },
+    methods: {
+        deleteitem(event) {
+            this.todolist = this.todolist.filter((t) => t !== event);
+        },
+        ant(event) {
+            this.todolist.push({
+                id: new Date().getTime(),
+                text: event.target.value
+            });
+            event.target.value = "";
+            console.log(event.target.value);
+        }
+    },
+}
+</script>
+
+<style>
+body {
+    background-color: #212429 !important;
+}
+
+#todotext {
+    margin-right: 16px;
+}
+
+#mainput::placeholder {
+    color: #ffc107;
+}
+
+#mainput {
+    width: 66% !important;
+}
+</style>
